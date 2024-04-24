@@ -1,0 +1,52 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  height: 30px;
+  background-color: snow;
+  border-radius: 12px;
+  padding: 5px;
+  column-gap: 10px;
+}
+
+.task > input[type="text"] {
+  /* background-color: rgba(0, 255, 255, 0); */
+  /* border: none; */
+}
+
+.task > .text {
+  flex: 1;
+  text-align: left;
+}
+
+.task > .text-complete {
+  flex: 1;
+  text-align: left;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.task > .button-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 30px;
+  background-color: lightsteelblue;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.task > .button-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 30px;
+  background-color: salmon;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
