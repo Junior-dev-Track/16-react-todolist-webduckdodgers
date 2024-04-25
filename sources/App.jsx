@@ -1,25 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Task } from "./Task.jsx";
 
 export const App = () => {
-  const [list, setList] = useState([]);
-  console.log(list);
+  const [list, _list] = useState([]);
 
-  const addTask = () => {
-    const newTask = {
-      id: task.id,
+  const inputText = useRef();
+
+  const onSubmitForm = (element) => {
+    element.preventDefault();
+
+    const form = element.target;
+    const task = {
       completed: false,
-      text: task.value,
+      title: inputText.current.value,
     };
 
-    setList([...list, newTask]);
-    task.value = null;
+    _list([...list, task]);
+
+    form.reset();
   };
 
-  const completeTask = (indexToComplete) => {
-    setList(
+  const completeTask = (key) => {
+    _list(
       list.map((task, index) => {
-        if (index === indexToComplete) {
+        if (index === key) {
           return { ...task, completed: !task.completed };
         }
         return task;
@@ -27,32 +31,32 @@ export const App = () => {
     );
   };
 
-  const editTask = (indexToEdit) => {};
+  const editTask = (key) => {};
 
-  const deleteTask = (indexToDelete) => {
-    const updatedList = list.filter((task, currentIndex) => {
-      return currentIndex !== indexToDelete;
+  const deleteTask = (key) => {
+    list.filter((task, index) => {
+      return index !== key;
     });
-    setList(updatedList);
   };
 
   return (
     <main>
       <h1>Task List</h1>
-      <form>
-        <input type="text" id="task" />
-        <input type="button" value="Add" onClick={addTask} />
+
+      <form onSubmit={onSubmitForm}>
+        <input type="text" ref={inputText} />
+        <button type="submit">Add</button>
       </form>
+
       <ul>
-        {list.map((task, index) => (
+        {list.map(({ title, completed }) => (
           <Task
-            id={index}
-            key={task.id}
-            completed={task.completed}
-            text={task.text}
-            onComplete={() => completeTask(task.id)}
-            onEdit={() => editTask(task.id)}
-            onDelete={() => deleteTask(task.id)}
+            key={title}
+            completed={completed}
+            text={title}
+            onComplete={() => completeTask(title)}
+            onEdit={() => editTask(title)}
+            onDelete={() => deleteTask(title)}
           />
         ))}
       </ul>

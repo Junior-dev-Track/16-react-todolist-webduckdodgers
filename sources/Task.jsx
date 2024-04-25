@@ -1,17 +1,17 @@
 export const Task = (props) => {
+  const { completed, text, onComplete, onEdit, onDelete } = props;
   return (
     <li className="task">
-      <input type="checkbox" onClick={props.onComplete} />
+      <input type="checkbox" onClick={onComplete} />
       <input
         type="text"
-        className={props.completed ? "text-complete" : "text"}
-        onChange={(event) => event.target.value}
-        value={props.text}
+        className={completed ? "text-complete" : "text"}
+        value={text}
       />
-      <div className="button-edit" onClick={props.onEdit}>
+      <div className="button-edit" onChange={onEdit}>
         Edit
       </div>
-      <div className="button-delete" onClick={props.onDelete}>
+      <div className="button-delete" onClick={onDelete}>
         Delete
       </div>
     </li>
